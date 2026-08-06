@@ -15,6 +15,8 @@ namespace KitchenChaos.Input
 
         public bool JumpPressedThisFrame { get; private set; }
 
+        public bool AttackPressedThisFrame { get; private set; }
+
         private InputSystem_Actions _inputActions;
 
         private void Awake()
@@ -35,6 +37,7 @@ namespace KitchenChaos.Input
             // prevents the player from drifting on the last known input.
             Horizontal = 0f;
             JumpPressedThisFrame = false;
+            AttackPressedThisFrame = false;
         }
 
         private void OnDestroy()
@@ -47,6 +50,7 @@ namespace KitchenChaos.Input
         {
             Horizontal = _inputActions.Player.Move.ReadValue<Vector2>().x;
             JumpPressedThisFrame = _inputActions.Player.Jump.WasPressedThisFrame();
+            AttackPressedThisFrame = _inputActions.Player.Attack.WasPressedThisFrame();
         }
     }
 }
