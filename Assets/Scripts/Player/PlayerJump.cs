@@ -20,6 +20,13 @@ namespace KitchenChaos.Player
         /// </summary>
         public bool IsGrounded { get; private set; }
 
+        /// <summary>
+        /// What the player is standing on as of the last physics step, or null while
+        /// airborne. Published for the same reason as <see cref="IsGrounded"/>: the
+        /// ground is already known here, so nothing else has to query for it again.
+        /// </summary>
+        public Collider2D GroundCollider { get; private set; }
+
         private Rigidbody2D _rigidbody;
         private PlayerInputReader _input;
         private bool _jumpPressLatched;
@@ -53,7 +60,7 @@ namespace KitchenChaos.Player
 
         private void FixedUpdate()
         {
-            IsGrounded = CheckGrounded();
+            UpdateGroundContact();
 
             UpdateTakeoffState(IsGrounded);
             UpdateCoyoteTime(IsGrounded);
@@ -129,9 +136,12 @@ namespace KitchenChaos.Player
             _awaitingTakeoff = true;
         }
 
-        private bool CheckGrounded()
+        private void UpdateGroundContact()
         {
-            return Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayers) != null;
+            // The same single query answers both questions, so keeping the collider
+            // costs nothing on top of the ground test that already runs every step.
+            GroundCollider = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayers);
+            IsGrounded = GroundCollider != null;
         }
 
         private void OnDrawGizmosSelected()
