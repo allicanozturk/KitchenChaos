@@ -14,6 +14,12 @@ namespace KitchenChaos.Player
         [SerializeField, Min(0f)] private float _groundCheckRadius = 0.15f;
         [SerializeField] private LayerMask _groundLayers;
 
+        /// <summary>
+        /// Ground state as of the last physics step. Published so presentation can
+        /// read it instead of running a second overlap query of its own.
+        /// </summary>
+        public bool IsGrounded { get; private set; }
+
         private Rigidbody2D _rigidbody;
         private PlayerInputReader _input;
         private bool _jumpPressLatched;
@@ -47,10 +53,10 @@ namespace KitchenChaos.Player
 
         private void FixedUpdate()
         {
-            bool isGrounded = IsGrounded();
+            IsGrounded = CheckGrounded();
 
-            UpdateTakeoffState(isGrounded);
-            UpdateCoyoteTime(isGrounded);
+            UpdateTakeoffState(IsGrounded);
+            UpdateCoyoteTime(IsGrounded);
 
             bool hasJumpRequest = UpdateJumpBuffer();
             if (!hasJumpRequest)
@@ -60,7 +66,7 @@ namespace KitchenChaos.Player
 
             // Coyote time only extends the last ground contact, and Jump() spends it,
             // so it can never stack into a second jump while airborne.
-            if (_awaitingTakeoff || (!isGrounded && _coyoteTimeRemaining <= 0f))
+            if (_awaitingTakeoff || (!IsGrounded && _coyoteTimeRemaining <= 0f))
             {
                 return;
             }
@@ -123,7 +129,7 @@ namespace KitchenChaos.Player
             _awaitingTakeoff = true;
         }
 
-        private bool IsGrounded()
+        private bool CheckGrounded()
         {
             return Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayers) != null;
         }

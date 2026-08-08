@@ -3,9 +3,9 @@ using UnityEngine;
 namespace KitchenChaos.Player
 {
     /// <summary>
-    /// Remembers where the player started and puts it back there on request.
-    /// Keeping this out of PlayerHealth lets a future checkpoint system change where
-    /// the player reappears without touching how damage is handled.
+    /// Owns where the player reappears and puts it back there on request.
+    /// Keeping this out of PlayerHealth lets checkpoints move the respawn point
+    /// without touching how damage is handled.
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public sealed class PlayerRespawn : MonoBehaviour
@@ -20,6 +20,15 @@ namespace KitchenChaos.Player
             // The position authored in the scene is the spawn point, so no marker
             // object has to be created and wired up in the Inspector.
             _spawnPosition = _rigidbody.position;
+        }
+
+        /// <summary>
+        /// Moves the point the player returns to after death. The latest call wins, so
+        /// activating a checkpoint simply replaces the previous respawn point.
+        /// </summary>
+        public void SetSpawnPosition(Vector2 position)
+        {
+            _spawnPosition = position;
         }
 
         public void Respawn()

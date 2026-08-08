@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using KitchenChaos.Enemy;
 using KitchenChaos.Input;
@@ -17,6 +18,12 @@ namespace KitchenChaos.Player
         [SerializeField, Min(1)] private int _attackDamage = 1;
         [SerializeField, Min(0f)] private float _attackCooldown = 0.4f;
         [SerializeField] private LayerMask _targetLayers;
+
+        /// <summary>
+        /// Raised once per accepted swing, whether or not it connects, so presentation
+        /// can react without the attack rules having to know about it.
+        /// </summary>
+        public event Action Attacked;
 
         // Reused across swings so a query that runs several times a second does not
         // allocate a fresh buffer every time.
@@ -75,6 +82,9 @@ namespace KitchenChaos.Player
 
         private void Attack()
         {
+            // Announced before the query so a swing that hits nothing still animates.
+            Attacked?.Invoke();
+
             _damagedThisSwing.Clear();
 
             int hitCount = Physics2D.OverlapCircle(_attackOrigin.position, _attackRadius, _targetFilter, _overlapResults);
