@@ -1,3 +1,4 @@
+using System;
 using KitchenChaos.Input;
 using UnityEngine;
 
@@ -26,6 +27,12 @@ namespace KitchenChaos.Player
         /// ground is already known here, so nothing else has to query for it again.
         /// </summary>
         public Collider2D GroundCollider { get; private set; }
+
+        /// <summary>
+        /// Raised once per accepted takeoff, so presentation reacts to the jumps that
+        /// actually happened rather than to every press the rules turned down.
+        /// </summary>
+        public event Action Jumped;
 
         private Rigidbody2D _rigidbody;
         private PlayerInputReader _input;
@@ -134,6 +141,10 @@ namespace KitchenChaos.Player
             _jumpBufferRemaining = 0f;
             _coyoteTimeRemaining = 0f;
             _awaitingTakeoff = true;
+
+            // Announced after the windows are spent, so a listener can never observe a
+            // half-applied jump state.
+            Jumped?.Invoke();
         }
 
         private void UpdateGroundContact()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace KitchenChaos.Player
@@ -10,9 +11,16 @@ namespace KitchenChaos.Player
     {
         public int Current { get; private set; }
 
+        /// <summary>
+        /// Raised with the amount every time score is added. A collectible destroys
+        /// itself on pickup, so this is where presentation can still react to it.
+        /// </summary>
+        public event Action<int> ScoreAdded;
+
         public void Add(int amount)
         {
             Current += amount;
+            ScoreAdded?.Invoke(amount);
 
 #if UNITY_EDITOR
             // The score has no UI yet, so play tests need a way to verify it without

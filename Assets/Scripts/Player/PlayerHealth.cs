@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace KitchenChaos.Player
@@ -13,6 +14,12 @@ namespace KitchenChaos.Player
         public int MaxHealth => _maxHealth;
 
         public int CurrentHealth { get; private set; }
+
+        /// <summary>
+        /// Raised once per damage tick that actually landed, so presentation stays in
+        /// step with the rules that reject a hit instead of guessing at them.
+        /// </summary>
+        public event Action Damaged;
 
         private PlayerRespawn _respawn;
         private int _lastDeathFrame = -1;
@@ -42,6 +49,10 @@ namespace KitchenChaos.Player
 
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
             LogHealth();
+
+            // A lethal hit is still a hit, so it is announced before the death path
+            // runs rather than being swallowed by the respawn.
+            Damaged?.Invoke();
 
             if (CurrentHealth == 0)
             {

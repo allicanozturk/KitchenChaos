@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace KitchenChaos.Enemy
@@ -14,6 +15,12 @@ namespace KitchenChaos.Enemy
         public int MaxHealth => _maxHealth;
 
         public int CurrentHealth { get; private set; }
+
+        /// <summary>
+        /// Raised once, while the enemy is still alive in the scene, so presentation can
+        /// react before it is deactivated and destroyed.
+        /// </summary>
+        public event Action Died;
 
         private bool _isDead;
 
@@ -50,6 +57,10 @@ namespace KitchenChaos.Enemy
         private void Die()
         {
             _isDead = true;
+
+            // Announced first: deactivating below also disables every listener on this
+            // enemy, so anything that wants to react has to hear about it before that.
+            Died?.Invoke();
 
             // Deactivating is what actually stops the enemy this frame: it ends the
             // patrol step and the contact damage triggers immediately, instead of

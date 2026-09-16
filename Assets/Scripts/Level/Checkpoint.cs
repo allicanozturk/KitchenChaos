@@ -1,3 +1,4 @@
+using System;
 using KitchenChaos.Player;
 using UnityEngine;
 
@@ -10,6 +11,12 @@ namespace KitchenChaos.Level
     /// </summary>
     public sealed class Checkpoint : MonoBehaviour
     {
+        /// <summary>
+        /// Raised every time this checkpoint claims the respawn point, re-entries
+        /// included, because reclaiming an earlier checkpoint is a real activation.
+        /// </summary>
+        public event Action Activated;
+
         private void Awake()
         {
             // Without a trigger collider the checkpoint is silently unreachable, so fail
@@ -35,6 +42,8 @@ namespace KitchenChaos.Level
             // Re-entering is harmless: writing the same position again changes nothing,
             // and coming back to an earlier checkpoint is meant to reclaim it.
             respawn.SetSpawnPosition(transform.position);
+
+            Activated?.Invoke();
 
 #if UNITY_EDITOR
             // Checkpoints have no visual state yet, so play tests need a way to see
