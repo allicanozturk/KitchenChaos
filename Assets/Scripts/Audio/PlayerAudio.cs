@@ -18,6 +18,7 @@ namespace KitchenChaos.Audio
     {
         [SerializeField] private AudioClip _jumpClip;
         [SerializeField] private AudioClip _attackClip;
+        [SerializeField] private AudioClip _impactClip;
         [SerializeField] private AudioClip _damageClip;
         [SerializeField] private AudioClip _coinPickupClip;
 
@@ -26,6 +27,7 @@ namespace KitchenChaos.Audio
         private PlayerAttack _attack;
         private PlayerHealth _health;
         private PlayerScore _score;
+        private bool _impactPlayedThisSwing;
 
         private void Awake()
         {
@@ -39,7 +41,8 @@ namespace KitchenChaos.Audio
         private void OnEnable()
         {
             _jump.Jumped += OnJumped;
-            _attack.Attacked += OnAttacked;
+            _attack.ActiveStarted += OnActiveStarted;
+            _attack.HitConnected += OnHitConnected;
             _health.Damaged += OnDamaged;
             _score.ScoreAdded += OnScoreAdded;
         }
@@ -47,7 +50,8 @@ namespace KitchenChaos.Audio
         private void OnDisable()
         {
             _jump.Jumped -= OnJumped;
-            _attack.Attacked -= OnAttacked;
+            _attack.ActiveStarted -= OnActiveStarted;
+            _attack.HitConnected -= OnHitConnected;
             _health.Damaged -= OnDamaged;
             _score.ScoreAdded -= OnScoreAdded;
         }
@@ -57,9 +61,21 @@ namespace KitchenChaos.Audio
             Play(_jumpClip);
         }
 
-        private void OnAttacked()
+        private void OnActiveStarted()
         {
+            _impactPlayedThisSwing = false;
             Play(_attackClip);
+        }
+
+        private void OnHitConnected(Vector2 point)
+        {
+            // A multi-target swing still makes one impact sound, avoiding stacked
+            // full-volume one-shots. Every accepted target gets its visual spark.
+            if (_impactPlayedThisSwing)
+                return;
+
+            _impactPlayedThisSwing = true;
+            Play(_impactClip);
         }
 
         private void OnDamaged()

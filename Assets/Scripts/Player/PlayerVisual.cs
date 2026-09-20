@@ -17,6 +17,7 @@ namespace KitchenChaos.Player
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private Transform _attackOrigin;
+        [SerializeField] private bool _playLegacyAttackAnimation = true;
 
         // Hashed once because the names are written to the Animator every frame.
         private static readonly int SpeedParameter = Animator.StringToHash("Speed");
@@ -24,15 +25,9 @@ namespace KitchenChaos.Player
         private static readonly int IsGroundedParameter = Animator.StringToHash("IsGrounded");
         private static readonly int AttackParameter = Animator.StringToHash("Attack");
 
-        // Below this the stick is at rest, so the last direction is kept instead of
-        // being flicked around by analogue drift.
-        private const float FacingInputThreshold = 0.01f;
-
         private PlayerInputReader _input;
         private PlayerJump _jump;
         private PlayerAttack _attack;
-        private Vector3 _attackOriginRightLocalPosition;
-        private bool _isFacingRight;
 
         private void Awake()
         {
@@ -46,16 +41,6 @@ namespace KitchenChaos.Player
                 return;
             }
 
-            // The authored offset is stored as a reach rather than a position, so the
-            // origin mirrors correctly no matter which side it was placed on. An
-            // unflipped sprite is the right-facing pose.
-            Vector3 authoredLocalPosition = _attackOrigin.localPosition;
-            _attackOriginRightLocalPosition = new Vector3(
-                Mathf.Abs(authoredLocalPosition.x),
-                authoredLocalPosition.y,
-                authoredLocalPosition.z);
-
-            _isFacingRight = !_spriteRenderer.flipX;
             ApplyFacing();
         }
 
@@ -71,44 +56,31 @@ namespace KitchenChaos.Player
 
         private void Update()
         {
-            UpdateFacing();
+            if (_input.IsGameplayBlocked)
+                return;
+
+            ApplyFacing();
             UpdateAnimator();
         }
 
-        private void UpdateFacing()
+        public void ResetTransientState()
         {
-            float horizontal = _input.Horizontal;
-
-            // Facing follows intent rather than velocity, so a standing player keeps
-            // the last direction instead of turning as external forces push it around.
-            if (Mathf.Abs(horizontal) < FacingInputThreshold)
-            {
+            if (!isActiveAndEnabled || _animator == null || !_animator.isActiveAndEnabled ||
+                _animator.runtimeAnimatorController == null)
                 return;
-            }
 
-            bool shouldFaceRight = horizontal > 0f;
-            if (shouldFaceRight == _isFacingRight)
-            {
-                return;
-            }
-
-            _isFacingRight = shouldFaceRight;
+            _animator.ResetTrigger(AttackParameter);
+            _animator.Rebind();
+            _animator.Update(0f);
+            UpdateAnimator();
             ApplyFacing();
         }
 
         private void ApplyFacing()
         {
-            _spriteRenderer.flipX = !_isFacingRight;
-
-            // Only the local X offset is mirrored: the reach keeps its authored height
-            // and no negative scale is ever applied, which would deform the colliders.
-            Vector3 mirroredLocalPosition = _attackOriginRightLocalPosition;
-            if (!_isFacingRight)
-            {
-                mirroredLocalPosition.x = -mirroredLocalPosition.x;
-            }
-
-            _attackOrigin.localPosition = mirroredLocalPosition;
+            // The gameplay component owns direction and reach. Disabling rendering
+            // must never change which side an attack can hit.
+            _spriteRenderer.flipX = _attack.FacingDirection < 0;
         }
 
         private void UpdateAnimator()
@@ -123,7 +95,10 @@ namespace KitchenChaos.Player
 
         private void OnAttacked()
         {
-            _animator.SetTrigger(AttackParameter);
+            // The prototype's procedural spatula uses the gameplay phase clock.
+            // Old scenes may retain their placeholder body-attack animation.
+            if (_playLegacyAttackAnimation)
+                _animator.SetTrigger(AttackParameter);
         }
 
         private bool HasRequiredReferences()

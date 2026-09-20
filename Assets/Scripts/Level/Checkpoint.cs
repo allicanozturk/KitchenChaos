@@ -41,7 +41,8 @@ namespace KitchenChaos.Level
 
             // Re-entering is harmless: writing the same position again changes nothing,
             // and coming back to an earlier checkpoint is meant to reclaim it.
-            respawn.SetSpawnPosition(transform.position);
+            if (!respawn.SetSpawnPosition(transform.position))
+                return;
 
             Activated?.Invoke();
 

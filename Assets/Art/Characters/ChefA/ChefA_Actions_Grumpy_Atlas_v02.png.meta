@@ -1,0 +1,451 @@
+fileFormatVersion: 2
+guid: bbc5ed12660ea4d0f8d80be6e7d4e719
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6478416947340781770
+    second: ChefA_Actions_Grumpy_Atlas_v02_0
+  - first:
+      213: 7843287025287645914
+    second: ChefA_Actions_Grumpy_Atlas_v02_1
+  - first:
+      213: 7837433262151046460
+    second: ChefA_Actions_Grumpy_Atlas_v02_2
+  - first:
+      213: -3802139564407471303
+    second: ChefA_Actions_Grumpy_Atlas_v02_3
+  - first:
+      213: 3736388873223376300
+    second: ChefA_Actions_Grumpy_Atlas_v02_4
+  - first:
+      213: -3854729560552387717
+    second: ChefA_Actions_Grumpy_Atlas_v02_5
+  - first:
+      213: 8972524871905077354
+    second: ChefA_Actions_Grumpy_Atlas_v02_6
+  - first:
+      213: -7818633936384367272
+    second: ChefA_Actions_Grumpy_Atlas_v02_7
+  - first:
+      213: -8466500562491863365
+    second: ChefA_Actions_Grumpy_Atlas_v02_8
+  - first:
+      213: 7477068046741266816
+    second: ChefA_Actions_Grumpy_Atlas_v02_9
+  - first:
+      213: -5791829464597581695
+    second: ChefA_Actions_Grumpy_Atlas_v02_10
+  - first:
+      213: 9122348969073949259
+    second: ChefA_Actions_Grumpy_Atlas_v02_11
+  - first:
+      213: 2495782877420493625
+    second: ChefA_Actions_Grumpy_Atlas_v02_12
+  - first:
+      213: 1586600483172175986
+    second: ChefA_Actions_Grumpy_Atlas_v02_13
+  - first:
+      213: 1780047359831718471
+    second: ChefA_Actions_Grumpy_Atlas_v02_14
+  - first:
+      213: 4559627510085358626
+    second: ChefA_Actions_Grumpy_Atlas_v02_15
+  - first:
+      213: 7113584140411366056
+    second: ChefA_Actions_Grumpy_Atlas_v02_16
+  - first:
+      213: 5852676381882879456
+    second: ChefA_Actions_Grumpy_Atlas_v02_17
+  - first:
+      213: 2441884712282645424
+    second: ChefA_Actions_Grumpy_Atlas_v02_18
+  - first:
+      213: 6149245980408722287
+    second: ChefA_Actions_Grumpy_Atlas_v02_19
+  - first:
+      213: 1053561947012859700
+    second: ChefA_Actions_Grumpy_Atlas_v02_20
+  - first:
+      213: 4299786158292002642
+    second: ChefA_Actions_Grumpy_Atlas_v02_21
+  - first:
+      213: -2114919917306826808
+    second: ChefA_Actions_Grumpy_Atlas_v02_22
+  - first:
+      213: 1470885579046701330
+    second: ChefA_Actions_Grumpy_Atlas_v02_23
+  - first:
+      213: -4540019595836922488
+    second: ChefA_Actions_Grumpy_Atlas_v02_24
+  - first:
+      213: 3797468680101353674
+    second: ChefA_Actions_Grumpy_Atlas_v02_25
+  - first:
+      213: -2746928501597358743
+    second: ChefA_Actions_Grumpy_Atlas_v02_26
+  - first:
+      213: -6879807413270556463
+    second: ChefA_Actions_Grumpy_Atlas_v02_27
+  - first:
+      213: -5650460509888559395
+    second: ChefA_Actions_Grumpy_Atlas_v02_28
+  - first:
+      213: 423241032071999271
+    second: ChefA_Actions_Grumpy_Atlas_v02_29
+  - first:
+      213: 507451859181438115
+    second: ChefA_Actions_Grumpy_Atlas_v02_30
+  - first:
+      213: -7586882013460194971
+    second: ChefA_Actions_Grumpy_Atlas_v02_31
+  - first:
+      213: 3693710118782217205
+    second: ChefA_Actions_Grumpy_Atlas_v02_32
+  - first:
+      213: -2052567067103725516
+    second: ChefA_Actions_Grumpy_Atlas_v02_33
+  - first:
+      213: -7479995367979809025
+    second: ChefA_Actions_Grumpy_Atlas_v02_34
+  - first:
+      213: 7206567643467342522
+    second: ChefA_Actions_Grumpy_Atlas_v02_35
+  - first:
+      213: -8619617413867295816
+    second: ChefA_Actions_Grumpy_Atlas_v02_36
+  - first:
+      213: 8636699210014496775
+    second: ChefA_Actions_Grumpy_Atlas_v02_37
+  - first:
+      213: 938286053124051207
+    second: ChefA_Actions_Grumpy_Atlas_v02_38
+  - first:
+      213: -1838839454768731650
+    second: ChefA_Actions_Grumpy_Atlas_v02_39
+  - first:
+      213: 2937196375578170618
+    second: ChefA_Actions_Grumpy_Atlas_v02_40
+  - first:
+      213: 8371036179459816393
+    second: ChefA_Actions_Grumpy_Atlas_v02_41
+  - first:
+      213: -5026526280596732234
+    second: ChefA_Actions_Grumpy_Atlas_v02_42
+  - first:
+      213: 5771293209047159535
+    second: ChefA_Actions_Grumpy_Atlas_v02_43
+  - first:
+      213: 2460942292202078082
+    second: ChefA_Actions_Grumpy_Atlas_v02_44
+  - first:
+      213: -4332083089468325489
+    second: ChefA_Actions_Grumpy_Atlas_v02_45
+  - first:
+      213: -7574100994517665685
+    second: ChefA_Actions_Grumpy_Atlas_v02_46
+  - first:
+      213: 104768156965806584
+    second: ChefA_Actions_Grumpy_Atlas_v02_47
+  - first:
+      213: -7780990380459243992
+    second: ChefA_Actions_Grumpy_Atlas_v02_48
+  - first:
+      213: -1543747320918507270
+    second: ChefA_Actions_Grumpy_Atlas_v02_49
+  - first:
+      213: -6517120816897136600
+    second: ChefA_Actions_Grumpy_Atlas_v02_50
+  - first:
+      213: 5521737583928149670
+    second: ChefA_Actions_Grumpy_Atlas_v02_51
+  - first:
+      213: -932926431170800596
+    second: ChefA_Actions_Grumpy_Atlas_v02_52
+  - first:
+      213: 1284743458659419409
+    second: ChefA_Actions_Grumpy_Atlas_v02_53
+  - first:
+      213: -5345894978882810064
+    second: ChefA_Actions_Grumpy_Atlas_v02_54
+  - first:
+      213: 1497951056092950209
+    second: ChefA_Actions_Grumpy_Atlas_v02_55
+  - first:
+      213: 7634413231193097027
+    second: ChefA_Actions_Grumpy_Atlas_v02_56
+  - first:
+      213: -4293557355932875058
+    second: ChefA_Actions_Grumpy_Atlas_v02_57
+  - first:
+      213: -5219625889584088532
+    second: ChefA_Actions_Grumpy_Atlas_v02_58
+  - first:
+      213: 337104430867933375
+    second: ChefA_Actions_Grumpy_Atlas_v02_59
+  - first:
+      213: 1745623393921065695
+    second: ChefA_Actions_Grumpy_Atlas_v02_60
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 122
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ChefA_Jump_Rise
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.6611328, y: 0.01953125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 218b18f3d94624c7fb18ab6097c77430
+      internalID: 1266398941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Jump_Apex
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.5498047, y: 0.01953125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65fbc71b7f7ae4d67ae16aa50c2c5221
+      internalID: 258551242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Jump_Fall
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.4951172, y: 0.01953125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 469fdf555dd5d475a93bf53f4c8543c8
+      internalID: -1489395537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Attack_Windup
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.57910156, y: 0.04296875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9d9958ca28664981a5f281373b63e7c
+      internalID: 125862953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Attack_Strike
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.55566406, y: 0.04296875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 416191d1306c7444599615e7c0dc949a
+      internalID: 31446522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Attack_Recovery
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.4873047, y: 0.041015625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 051d623ac77464399b904e91a080fb93
+      internalID: -2048537205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: cb10c0b893c5d4d2cbf4178e040c6192
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ChefA_Attack_Recovery: -2048537205
+      ChefA_Attack_Strike: 31446522
+      ChefA_Attack_Windup: 125862953
+      ChefA_Jump_Apex: 258551242
+      ChefA_Jump_Fall: -1489395537
+      ChefA_Jump_Rise: 1266398941
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

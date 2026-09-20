@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using KitchenChaos.Input;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace KitchenChaos.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(PlayerInputReader))]
+    [DefaultExecutionOrder(-70)]
     public sealed class PlayerJump : MonoBehaviour
     {
         [SerializeField, Min(0f)] private float _jumpForce = 10f;
@@ -40,11 +42,19 @@ namespace KitchenChaos.Player
         private bool _awaitingTakeoff;
         private float _coyoteTimeRemaining;
         private float _jumpBufferRemaining;
+        private ContactFilter2D _groundFilter;
+        private readonly List<ContactPoint2D> _groundContacts = new(8);
+        private PlayerMobility _mobility;
+        private bool _airJumpAvailable;
+        private bool _canCutJump;
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _input = GetComponent<PlayerInputReader>();
+            _mobility = GetComponent<PlayerMobility>();
+            _groundFilter.useTriggers = false;
+            _groundFilter.SetLayerMask(_groundLayers);
 
             if (_groundCheck == null)
             {
@@ -57,6 +67,9 @@ namespace KitchenChaos.Player
 
         private void Update()
         {
+            if (_input.IsGameplayBlocked)
+                return;
+
             // Latching in Update guarantees a press landing between two physics steps
             // is still seen by FixedUpdate, even when the buffer window is zero.
             if (_input.JumpPressedThisFrame)
@@ -67,25 +80,53 @@ namespace KitchenChaos.Player
 
         private void FixedUpdate()
         {
+            if (_input.IsGameplayBlocked || !_rigidbody.simulated)
+                return;
+
             UpdateGroundContact();
 
             UpdateTakeoffState(IsGrounded);
             UpdateCoyoteTime(IsGrounded);
+            if (IsGrounded && !_awaitingTakeoff) _airJumpAvailable = true;
 
             bool hasJumpRequest = UpdateJumpBuffer();
-            if (!hasJumpRequest)
+            bool upgraded = _mobility != null && _mobility.isActiveAndEnabled;
+            if (upgraded && _mobility.IsDashing)
             {
+                _jumpBufferRemaining = 0f;
                 return;
             }
-
-            // Coyote time only extends the last ground contact, and Jump() spends it,
-            // so it can never stack into a second jump while airborne.
-            if (_awaitingTakeoff || (!IsGrounded && _coyoteTimeRemaining <= 0f))
+            if (hasJumpRequest && !_awaitingTakeoff &&
+                (!upgraded || _mobility.TryStandForJump()))
             {
-                return;
+                if (IsGrounded || _coyoteTimeRemaining > 0f) Jump(_jumpForce);
+                else if (upgraded && _airJumpAvailable)
+                {
+                    _airJumpAvailable = false;
+                    // A recovery jump must remain useful even with a quick tap.
+                    // Variable height applies only to the first/ground jump.
+                    Jump(_jumpForce * _mobility.AirJumpMultiplier, false);
+                }
             }
+            if (upgraded && _canCutJump && !_input.JumpHeld && _rigidbody.linearVelocity.y > 0f)
+            {
+                _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x,
+                    _rigidbody.linearVelocity.y * 0.5f);
+                _canCutJump = false;
+            }
+            if (_rigidbody.linearVelocity.y <= 0f) _canCutJump = false;
+        }
 
-            Jump();
+        public void ResetTransientState()
+        {
+            _jumpPressLatched = false;
+            _awaitingTakeoff = false;
+            _coyoteTimeRemaining = 0f;
+            _jumpBufferRemaining = 0f;
+            IsGrounded = false;
+            GroundCollider = null;
+            _airJumpAvailable = false;
+            _canCutJump = false;
         }
 
         private void UpdateTakeoffState(bool isGrounded)
@@ -130,17 +171,20 @@ namespace KitchenChaos.Player
             return pressedThisStep || _jumpBufferRemaining > 0f;
         }
 
-        private void Jump()
+        private void Jump(float force, bool canCut = true)
         {
             // Assigning the vertical velocity instead of adding force keeps the jump
             // height identical no matter how fast the player was falling on contact.
-            _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, _jumpForce);
+            _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, force);
 
             // Both windows are spent so neither leftover buffered input nor remaining
             // coyote time can feed a second jump before the player lands again.
             _jumpBufferRemaining = 0f;
             _coyoteTimeRemaining = 0f;
             _awaitingTakeoff = true;
+            IsGrounded = false;
+            GroundCollider = null;
+            _canCutJump = canCut;
 
             // Announced after the windows are spent, so a listener can never observe a
             // half-applied jump state.
@@ -149,9 +193,29 @@ namespace KitchenChaos.Player
 
         private void UpdateGroundContact()
         {
-            // The same single query answers both questions, so keeping the collider
-            // costs nothing on top of the ground test that already runs every step.
-            GroundCollider = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayers);
+            // A foot overlap also sees the SIDE of a step. Require an actual
+            // upward supporting contact so walls cannot refill coyote time or
+            // incorrectly hand ownership to a nearby moving platform.
+            GroundCollider = null;
+            int count = _rigidbody.GetContacts(_groundFilter, _groundContacts);
+            float bestNormalY = 0.7f;
+            for (int i = 0; i < count; i++)
+            {
+                ContactPoint2D contact = _groundContacts[i];
+                if (contact.normal.y < bestNormalY ||
+                    contact.point.y > _rigidbody.worldCenterOfMass.y)
+                    continue;
+
+                Collider2D support = contact.collider;
+                if (support != null && support.attachedRigidbody == _rigidbody)
+                    support = contact.otherCollider;
+                if (support == null || support.isTrigger || support.attachedRigidbody == _rigidbody ||
+                    (_groundLayers.value & (1 << support.gameObject.layer)) == 0)
+                    continue;
+
+                GroundCollider = support;
+                bestNormalY = contact.normal.y;
+            }
             IsGrounded = GroundCollider != null;
         }
 

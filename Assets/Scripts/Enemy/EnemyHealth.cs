@@ -17,6 +17,12 @@ namespace KitchenChaos.Enemy
         public int CurrentHealth { get; private set; }
 
         /// <summary>
+        /// Raised synchronously for accepted damage, before death is processed, so
+        /// hit reactions can suppress contact damage in the same physics step.
+        /// </summary>
+        public event Action Damaged;
+
+        /// <summary>
         /// Raised once, while the enemy is still alive in the scene, so presentation can
         /// react before it is deactivated and destroyed.
         /// </summary>
@@ -46,6 +52,7 @@ namespace KitchenChaos.Enemy
             }
 
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
+            Damaged?.Invoke();
             LogHealth();
 
             if (CurrentHealth == 0)

@@ -1,0 +1,780 @@
+fileFormatVersion: 2
+guid: ec2f9753a23414f33adabf76813c6a53
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4387549364492531916
+    second: ChefA_Run_Atlas_v01_0
+  - first:
+      213: 8794596243988120008
+    second: ChefA_Run_Atlas_v01_1
+  - first:
+      213: 5058205046722792921
+    second: ChefA_Run_Atlas_v01_2
+  - first:
+      213: 4262805702025068670
+    second: ChefA_Run_Atlas_v01_3
+  - first:
+      213: -1976031299506834895
+    second: ChefA_Run_Atlas_v01_4
+  - first:
+      213: -4157585689467029965
+    second: ChefA_Run_Atlas_v01_5
+  - first:
+      213: 859585599583943162
+    second: ChefA_Run_Atlas_v01_6
+  - first:
+      213: -9104868622783383139
+    second: ChefA_Run_Atlas_v01_7
+  - first:
+      213: -3603783882599130150
+    second: ChefA_Run_Atlas_v01_8
+  - first:
+      213: 4200114089968316745
+    second: ChefA_Run_Atlas_v01_9
+  - first:
+      213: -2235215163861331758
+    second: ChefA_Run_Atlas_v01_10
+  - first:
+      213: 1255697305479177229
+    second: ChefA_Run_Atlas_v01_11
+  - first:
+      213: 2710603896476431770
+    second: ChefA_Run_Atlas_v01_12
+  - first:
+      213: -8701726001173604646
+    second: ChefA_Run_Atlas_v01_13
+  - first:
+      213: 4033967491524675306
+    second: ChefA_Run_Atlas_v01_14
+  - first:
+      213: -2872712493246052209
+    second: ChefA_Run_Atlas_v01_15
+  - first:
+      213: 6469563500221839310
+    second: ChefA_Run_Atlas_v01_16
+  - first:
+      213: -875927168354421086
+    second: ChefA_Run_Atlas_v01_17
+  - first:
+      213: 6705208748847126384
+    second: ChefA_Run_Atlas_v01_18
+  - first:
+      213: 2301542497797928861
+    second: ChefA_Run_Atlas_v01_19
+  - first:
+      213: -490001679795960712
+    second: ChefA_Run_Atlas_v01_20
+  - first:
+      213: 6795874533875383229
+    second: ChefA_Run_Atlas_v01_21
+  - first:
+      213: 1998105038451050503
+    second: ChefA_Run_Atlas_v01_22
+  - first:
+      213: 383737985829302671
+    second: ChefA_Run_Atlas_v01_23
+  - first:
+      213: -3245766047160480895
+    second: ChefA_Run_Atlas_v01_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_0
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 513
+        width: 471
+        height: 499
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc8711996e4b3ec30800000000000000
+      internalID: 4387549364492531916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_1
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 785
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c185e920beac0a70800000000000000
+      internalID: 8794596243988120008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_2
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 469
+        width: 465
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dd0003c0ba523640800000000000000
+      internalID: 5058205046722792921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_3
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 787
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e70c6bf5337882b30800000000000000
+      internalID: 4262805702025068670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_4
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 508
+        width: 387
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13277d7a00ab394e0800000000000000
+      internalID: -1976031299506834895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_5
+      rect:
+        serializedVersion: 2
+        x: 1094
+        y: 773
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 336f110e7d94d46c0800000000000000
+      internalID: -4157585689467029965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_6
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 746
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af9fd3d6c8cddeb00800000000000000
+      internalID: 859585599583943162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_7
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 627
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d99756c2a3205a180800000000000000
+      internalID: -9104868622783383139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_8
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 605
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adb966607a9ccfdc0800000000000000
+      internalID: -3603783882599130150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_9
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 577
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 941bcacf28dc94a30800000000000000
+      internalID: 4200114089968316745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_10
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 527
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d09a71b6abeaf0e0800000000000000
+      internalID: -2235215163861331758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_11
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 15
+        width: 451
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d04608edb022d6110800000000000000
+      internalID: 1255697305479177229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_12
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 10
+        width: 361
+        height: 491
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a957448e1effd9520800000000000000
+      internalID: 2710603896476431770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_13
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 449
+        width: 31
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad6544f3e424d3780800000000000000
+      internalID: -8701726001173604646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_14
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 17
+        width: 539
+        height: 485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae64dc78f088bf730800000000000000
+      internalID: 4033967491524675306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_15
+      rect:
+        serializedVersion: 2
+        x: 1426
+        y: 419
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f880e3a25331228d0800000000000000
+      internalID: -2872712493246052209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_16
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 261
+        width: 23
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec73e8ae9b188c950800000000000000
+      internalID: 6469563500221839310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_17
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 311
+        width: 31
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a6fe1991e418d3f0800000000000000
+      internalID: -875927168354421086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_18
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 287
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 077dfd3d4dfad0d50800000000000000
+      internalID: 6705208748847126384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_19
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 295
+        width: 29
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d97f5b825b8b0ff10800000000000000
+      internalID: 2301542497797928861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_20
+      rect:
+        serializedVersion: 2
+        x: 1444
+        y: 271
+        width: 31
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 874ca60811a2339f0800000000000000
+      internalID: -490001679795960712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_21
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 255
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbbf3c9e1ebcf4e50800000000000000
+      internalID: 6795874533875383229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_22
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 231
+        width: 35
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7080bc032f1babb10800000000000000
+      internalID: 1998105038451050503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_23
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 271
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f81fd2c3aaf435500800000000000000
+      internalID: 383737985829302671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_Atlas_v01_24
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 245
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18bc9f61af8b4f2d0800000000000000
+      internalID: -3245766047160480895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ChefA_Run_Atlas_v01_0: 4387549364492531916
+      ChefA_Run_Atlas_v01_1: 8794596243988120008
+      ChefA_Run_Atlas_v01_10: -2235215163861331758
+      ChefA_Run_Atlas_v01_11: 1255697305479177229
+      ChefA_Run_Atlas_v01_12: 2710603896476431770
+      ChefA_Run_Atlas_v01_13: -8701726001173604646
+      ChefA_Run_Atlas_v01_14: 4033967491524675306
+      ChefA_Run_Atlas_v01_15: -2872712493246052209
+      ChefA_Run_Atlas_v01_16: 6469563500221839310
+      ChefA_Run_Atlas_v01_17: -875927168354421086
+      ChefA_Run_Atlas_v01_18: 6705208748847126384
+      ChefA_Run_Atlas_v01_19: 2301542497797928861
+      ChefA_Run_Atlas_v01_2: 5058205046722792921
+      ChefA_Run_Atlas_v01_20: -490001679795960712
+      ChefA_Run_Atlas_v01_21: 6795874533875383229
+      ChefA_Run_Atlas_v01_22: 1998105038451050503
+      ChefA_Run_Atlas_v01_23: 383737985829302671
+      ChefA_Run_Atlas_v01_24: -3245766047160480895
+      ChefA_Run_Atlas_v01_3: 4262805702025068670
+      ChefA_Run_Atlas_v01_4: -1976031299506834895
+      ChefA_Run_Atlas_v01_5: -4157585689467029965
+      ChefA_Run_Atlas_v01_6: 859585599583943162
+      ChefA_Run_Atlas_v01_7: -9104868622783383139
+      ChefA_Run_Atlas_v01_8: -3603783882599130150
+      ChefA_Run_Atlas_v01_9: 4200114089968316745
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

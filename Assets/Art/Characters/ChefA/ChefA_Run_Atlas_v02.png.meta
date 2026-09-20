@@ -1,0 +1,343 @@
+fileFormatVersion: 2
+guid: ad7095a9085db4465a38a9f734a4909d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4387549364492531916
+    second: ChefA_Run_Atlas_v01_0
+  - first:
+      213: 8794596243988120008
+    second: ChefA_Run_Atlas_v01_1
+  - first:
+      213: 5058205046722792921
+    second: ChefA_Run_Atlas_v01_2
+  - first:
+      213: 4262805702025068670
+    second: ChefA_Run_Atlas_v01_3
+  - first:
+      213: -1976031299506834895
+    second: ChefA_Run_Atlas_v01_4
+  - first:
+      213: -4157585689467029965
+    second: ChefA_Run_Atlas_v01_5
+  - first:
+      213: 859585599583943162
+    second: ChefA_Run_Atlas_v01_6
+  - first:
+      213: -9104868622783383139
+    second: ChefA_Run_Atlas_v01_7
+  - first:
+      213: -3603783882599130150
+    second: ChefA_Run_Atlas_v01_8
+  - first:
+      213: 4200114089968316745
+    second: ChefA_Run_Atlas_v01_9
+  - first:
+      213: -2235215163861331758
+    second: ChefA_Run_Atlas_v01_10
+  - first:
+      213: 1255697305479177229
+    second: ChefA_Run_Atlas_v01_11
+  - first:
+      213: 2710603896476431770
+    second: ChefA_Run_Atlas_v01_12
+  - first:
+      213: -8701726001173604646
+    second: ChefA_Run_Atlas_v01_13
+  - first:
+      213: 4033967491524675306
+    second: ChefA_Run_Atlas_v01_14
+  - first:
+      213: -2872712493246052209
+    second: ChefA_Run_Atlas_v01_15
+  - first:
+      213: 6469563500221839310
+    second: ChefA_Run_Atlas_v01_16
+  - first:
+      213: -875927168354421086
+    second: ChefA_Run_Atlas_v01_17
+  - first:
+      213: 6705208748847126384
+    second: ChefA_Run_Atlas_v01_18
+  - first:
+      213: 2301542497797928861
+    second: ChefA_Run_Atlas_v01_19
+  - first:
+      213: -490001679795960712
+    second: ChefA_Run_Atlas_v01_20
+  - first:
+      213: 6795874533875383229
+    second: ChefA_Run_Atlas_v01_21
+  - first:
+      213: 1998105038451050503
+    second: ChefA_Run_Atlas_v01_22
+  - first:
+      213: 383737985829302671
+    second: ChefA_Run_Atlas_v01_23
+  - first:
+      213: -3245766047160480895
+    second: ChefA_Run_Atlas_v01_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 122
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ChefA_Run_01
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.60839844, y: 0.015625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f207b6a9eb7c94dca863cb583136778f
+      internalID: -2054232700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_02
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.5263672, y: 0.015625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1768947b317048ec8a57cc90c4eff73
+      internalID: 1715801285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_03
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48535156, y: 0.015625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b7ff8dfadb0042ada8b66a49df9483e
+      internalID: -286627233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_04
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.59472656, y: 0.015625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 803a998174624403fbbfc2a3678a202a
+      internalID: -1232551718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_05
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.5185547, y: 0.015625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63bba3b3420974d1899924de7e609c9a
+      internalID: 388303141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Run_06
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.50683594, y: 0.015625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f94a0a65bd773407384f7243dbfc4a1a
+      internalID: -899170030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c9566435a70644bcf842792c68a36fca
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ChefA_Run_01: -2054232700
+      ChefA_Run_02: 1715801285
+      ChefA_Run_03: -286627233
+      ChefA_Run_04: -1232551718
+      ChefA_Run_05: 388303141
+      ChefA_Run_06: -899170030
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

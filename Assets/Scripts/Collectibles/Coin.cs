@@ -25,9 +25,21 @@ namespace KitchenChaos.Collectibles
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            TryCollect(other);
+        }
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            // A pickup overlapping the spawn point may be ignored in the teleport
+            // frame. Retry next step instead of requiring the player to leave first.
+            TryCollect(other);
+        }
+
+        private void TryCollect(Collider2D other)
+        {
             // Destroy only takes effect at the end of the frame, so a second overlap
             // in the same frame would otherwise score the same coin twice.
-            if (_isCollected)
+            if (!isActiveAndEnabled || _isCollected)
             {
                 return;
             }
@@ -39,6 +51,9 @@ namespace KitchenChaos.Collectibles
             {
                 return;
             }
+
+            if (touchingBody.TryGetComponent(out PlayerRespawn respawn) && !respawn.CanInteract)
+                return;
 
             _isCollected = true;
             score.Add(_value);

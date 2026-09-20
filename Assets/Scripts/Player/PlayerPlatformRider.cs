@@ -52,6 +52,9 @@ namespace KitchenChaos.Player
 
         private void FixedUpdate()
         {
+            if (!_rigidbody.simulated)
+                return;
+
             Collider2D ground = _jump.GroundCollider;
             if (ground == null)
             {

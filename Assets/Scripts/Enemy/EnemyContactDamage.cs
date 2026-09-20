@@ -14,9 +14,12 @@ namespace KitchenChaos.Enemy
         [SerializeField, Min(0f)] private float _damageInterval = 1f;
 
         private float _nextDamageTime;
+        private EnemyHitStun _hitStun;
 
         private void Awake()
         {
+            _hitStun = GetComponent<EnemyHitStun>();
+
             // Without a trigger collider the enemy is silently harmless, so fail once
             // and loudly instead of leaving the designer to guess.
             if (!TryGetComponent(out Collider2D damageCollider) || !damageCollider.isTrigger)
@@ -38,6 +41,13 @@ namespace KitchenChaos.Enemy
 
         private void TryDamage(Collider2D other)
         {
+            // Trigger callbacks can reach disabled behaviours. Keep the hurtbox
+            // enabled, but suppress outgoing damage while stunned or inactive.
+            if (!isActiveAndEnabled || (_hitStun != null && _hitStun.IsStunned))
+            {
+                return;
+            }
+
             // Contact is reported every physics step, so the interval is what keeps a
             // single touch from draining the whole health bar at once.
             if (Time.time < _nextDamageTime)

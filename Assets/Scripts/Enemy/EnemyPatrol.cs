@@ -15,12 +15,14 @@ namespace KitchenChaos.Enemy
         [SerializeField, Min(0f)] private float _patrolSpeed = 2f;
 
         private Rigidbody2D _rigidbody;
+        private EnemyHitStun _hitStun;
         private Vector2 _targetPoint;
         private Vector2 _pendingPoint;
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
+            _hitStun = GetComponent<EnemyHitStun>();
 
             if (_pointA == null || _pointB == null)
             {
@@ -48,6 +50,13 @@ namespace KitchenChaos.Enemy
 
         private void FixedUpdate()
         {
+            if (_hitStun != null && _hitStun.IsStunned)
+            {
+                _rigidbody.linearVelocity = Vector2.zero;
+                _rigidbody.MovePosition(_rigidbody.position);
+                return;
+            }
+
             // MoveTowards clamps at the target, so neither a high speed nor a long
             // physics step can carry the enemy past its patrol point.
             Vector2 nextPosition = Vector2.MoveTowards(

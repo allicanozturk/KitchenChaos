@@ -1,0 +1,292 @@
+fileFormatVersion: 2
+guid: ec06518520ed944ce8c4337976ad122f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4924797660261547956
+    second: ChefA_Death_Grumpy_Atlas_v01_0
+  - first:
+      213: 2076386603183548713
+    second: ChefA_Death_Grumpy_Atlas_v01_1
+  - first:
+      213: 6676982236645051399
+    second: ChefA_Death_Grumpy_Atlas_v01_2
+  - first:
+      213: -6776689043975590728
+    second: ChefA_Death_Grumpy_Atlas_v01_3
+  - first:
+      213: -1423411238189314470
+    second: ChefA_Death_Grumpy_Atlas_v01_4
+  - first:
+      213: -85028994012734474
+    second: ChefA_Death_Grumpy_Atlas_v01_5
+  - first:
+      213: 4580420488361413439
+    second: ChefA_Death_Grumpy_Atlas_v01_6
+  - first:
+      213: 1629562584641194340
+    second: ChefA_Death_Grumpy_Atlas_v01_7
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 130
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ChefA_Death_01
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 479
+        width: 346
+        height: 529
+      alignment: 9
+      pivot: {x: 0.4884393, y: 0.007561437}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed348830a7d5546ebb63b2bd228d88a3
+      internalID: -1763028759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Death_02
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 481
+        width: 316
+        height: 472
+      alignment: 9
+      pivot: {x: 0.49367088, y: 0.008474576}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1567bd56d0d97469fb4169e65f9972bf
+      internalID: 605367894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Death_03
+      rect:
+        serializedVersion: 2
+        x: 1069
+        y: 486
+        width: 409
+        height: 397
+      alignment: 9
+      pivot: {x: 0.30562347, y: 0.010075566}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46cd25612286749fd8373cfdfd32755c
+      internalID: -413994040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Death_04
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 59
+        width: 486
+        height: 335
+      alignment: 9
+      pivot: {x: 0.31069958, y: 0.011940299}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0e2e02ae72344c29a619ac639bad312
+      internalID: 1403649074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Death_05
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 61
+        width: 496
+        height: 225
+      alignment: 9
+      pivot: {x: 0.31653225, y: 0.017777778}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16a2b41901d534df8b3ac0e0feadd738
+      internalID: -394348158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChefA_Death_06
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 67
+        width: 501
+        height: 208
+      alignment: 9
+      pivot: {x: 0.3273453, y: 0.014423077}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 246faae55dac04944a8da7b33e26e2d5
+      internalID: -1384879016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: dc34eafa87e2c45788c8487dcf33f07b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ChefA_Death_01: -1763028759
+      ChefA_Death_02: 605367894
+      ChefA_Death_03: -413994040
+      ChefA_Death_04: 1403649074
+      ChefA_Death_05: -394348158
+      ChefA_Death_06: -1384879016
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

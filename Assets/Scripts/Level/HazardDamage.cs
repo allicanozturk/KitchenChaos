@@ -44,12 +44,8 @@ namespace KitchenChaos.Level
 
         private void TryDamage(Collider2D other)
         {
-            // Contact is reported every physics step, so the interval is what keeps a
-            // single touch from draining the whole health bar at once.
-            if (Time.time < _nextDamageTime)
-            {
+            if (!isActiveAndEnabled)
                 return;
-            }
 
             // A player's colliders may sit on child objects, but they all report the
             // same attached body, so the health is looked up from that body instead.
@@ -60,13 +56,20 @@ namespace KitchenChaos.Level
                 return;
             }
 
-            _nextDamageTime = Time.time + _damageInterval;
+            // Lethal pits bypass hurt/respawn protection and the ordinary source
+            // cooldown. PlayerHealth still rejects death/teleport-frame callbacks.
+            if (_instantKill)
+            {
+                health.Kill();
+                return;
+            }
 
-            // An instant kill is still routed through TakeDamage so death, respawn and
-            // the health restore stay owned by PlayerHealth; only the amount changes.
-            // MaxHealth empties the bar from any starting value without this component
-            // having to read the player's current state.
-            health.TakeDamage(_instantKill ? health.MaxHealth : _damage);
+            if (Time.time < _nextDamageTime)
+                return;
+
+            _nextDamageTime = Time.time + _damageInterval;
+            // Ground hazards are not enemy attacks: dash never protects from them.
+            health.TakeDamage(_damage, false);
         }
     }
 }

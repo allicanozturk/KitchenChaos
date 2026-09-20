@@ -1,3 +1,5 @@
+using System;
+using KitchenChaos.Input;
 using UnityEngine;
 
 namespace KitchenChaos.Player
@@ -12,10 +14,36 @@ namespace KitchenChaos.Player
     {
         private Rigidbody2D _rigidbody;
         private Vector2 _spawnPosition;
+        private PlayerInputReader _input;
+        private PlayerJump _jump;
+        private PlayerAttack _attack;
+        private PlayerMobility _mobility;
+        private PlayerVisual _visual;
+        private Animator _animator;
+        private bool _suspended;
+        private bool _respawning;
+        private bool _resumeSimulation;
+        private bool _resumeInputBlocked;
+        private float _resumeAnimatorSpeed;
+        private int _lastRespawnFrame = -1;
+
+        public bool CanInteract => isActiveAndEnabled && !_suspended && Time.frameCount != _lastRespawnFrame;
+
+        /// <summary>Life state resets while controls are locked, before teleport.</summary>
+        public event Action Respawning;
+
+        /// <summary>Position and transient state are reset; controls resume after this event.</summary>
+        public event Action Respawned;
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
+            _input = GetComponent<PlayerInputReader>();
+            _jump = GetComponent<PlayerJump>();
+            _attack = GetComponent<PlayerAttack>();
+            _mobility = GetComponent<PlayerMobility>();
+            _visual = GetComponent<PlayerVisual>();
+            _animator = GetComponent<Animator>();
 
             // The position authored in the scene is the spawn point, so no marker
             // object has to be created and wired up in the Inspector.
@@ -26,18 +54,93 @@ namespace KitchenChaos.Player
         /// Moves the point the player returns to after death. The latest call wins, so
         /// activating a checkpoint simply replaces the previous respawn point.
         /// </summary>
-        public void SetSpawnPosition(Vector2 position)
+        public bool SetSpawnPosition(Vector2 position)
         {
+            if (!CanInteract)
+                return false;
+
             _spawnPosition = position;
+            return true;
+        }
+
+        public void SuspendForDeath()
+        {
+            if (_suspended)
+                return;
+
+            _resumeSimulation = _rigidbody.simulated;
+            _resumeInputBlocked = _input != null && _input.IsGameplayBlocked;
+            _resumeAnimatorSpeed = _animator != null ? _animator.speed : 1f;
+            _suspended = true;
+            _input?.SetGameplayBlocked(true);
+            ResetTransientState(false);
+            StopMotion();
+            _rigidbody.simulated = false;
+            if (_animator != null)
+                _animator.speed = 0f;
         }
 
         public void Respawn()
         {
-            // Teleporting through the body keeps the physics and render positions in
-            // sync, and clearing the velocity stops the fall speed the player died
-            // with from carrying over into the new life.
-            _rigidbody.position = _spawnPosition;
+            if (_respawning)
+                return;
+
+            _respawning = true;
+            try
+            {
+                SuspendForDeath();
+                _lastRespawnFrame = Time.frameCount;
+                Respawning?.Invoke();
+                StopMotion();
+                _rigidbody.position = _spawnPosition;
+                // Update child origins immediately as well as the physics body.
+                transform.position = new Vector3(_spawnPosition.x, _spawnPosition.y, transform.position.z);
+                ResetTransientState(true);
+                Respawned?.Invoke();
+            }
+            finally
+            {
+                ResumeControls();
+                _respawning = false;
+            }
+        }
+
+        private void ResetTransientState(bool resetAnimation)
+        {
+            _input?.ResetTransientState();
+            _jump?.ResetTransientState();
+            _attack?.ResetTransientState();
+            _mobility?.ResetTransientState(resetAnimation);
+            if (resetAnimation)
+                _visual?.ResetTransientState();
+        }
+
+        private void StopMotion()
+        {
+            if (_rigidbody == null)
+                return;
+
             _rigidbody.linearVelocity = Vector2.zero;
+            _rigidbody.angularVelocity = 0f;
+        }
+
+        public void ResumeControls()
+        {
+            if (!_suspended)
+                return;
+
+            StopMotion();
+            if (_rigidbody != null)
+                _rigidbody.simulated = _resumeSimulation;
+            if (_animator != null)
+                _animator.speed = _resumeAnimatorSpeed;
+            _input?.SetGameplayBlocked(_resumeInputBlocked);
+            _suspended = false;
+        }
+
+        private void OnDisable()
+        {
+            ResumeControls();
         }
     }
 }
