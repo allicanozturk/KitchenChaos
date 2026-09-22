@@ -19,6 +19,7 @@ namespace KitchenChaos.Player
         private PlayerAttack _attack;
         private PlayerMobility _mobility;
         private PlayerVisual _visual;
+        private KitchenChaos.Level.CheckpointWorldReset _worldReset;
         private Animator _animator;
         private bool _suspended;
         private bool _respawning;
@@ -43,6 +44,7 @@ namespace KitchenChaos.Player
             _attack = GetComponent<PlayerAttack>();
             _mobility = GetComponent<PlayerMobility>();
             _visual = GetComponent<PlayerVisual>();
+            _worldReset = GetComponent<KitchenChaos.Level.CheckpointWorldReset>();
             _animator = GetComponent<Animator>();
 
             // The position authored in the scene is the spawn point, so no marker
@@ -54,12 +56,14 @@ namespace KitchenChaos.Player
         /// Moves the point the player returns to after death. The latest call wins, so
         /// activating a checkpoint simply replaces the previous respawn point.
         /// </summary>
-        public bool SetSpawnPosition(Vector2 position)
+        public bool SetSpawnPosition(Vector2 position, KitchenChaos.Level.Checkpoint checkpoint = null)
         {
             if (!CanInteract)
                 return false;
 
             _spawnPosition = position;
+            if (_worldReset != null && _worldReset.isActiveAndEnabled)
+                _worldReset.CaptureCheckpoint(checkpoint);
             return true;
         }
 
@@ -91,6 +95,14 @@ namespace KitchenChaos.Player
                 SuspendForDeath();
                 _lastRespawnFrame = Time.frameCount;
                 Respawning?.Invoke();
+                // Listeners clear old projectiles first. Opt-in test scene rebuilds
+                // the current and future sections; older scenes retain healing only.
+                if (_worldReset != null && _worldReset.isActiveAndEnabled)
+                    _worldReset.RestoreAttempt();
+                else
+                    foreach (var enemy in FindObjectsByType<KitchenChaos.Enemy.EnemyHealth>())
+                        if (enemy.gameObject.scene == gameObject.scene)
+                            enemy.RestoreForPlayerRespawn();
                 StopMotion();
                 _rigidbody.position = _spawnPosition;
                 // Update child origins immediately as well as the physics body.

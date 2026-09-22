@@ -20,6 +20,9 @@ namespace KitchenChaos.Enemy
         [Header("Hit expression")]
         [SerializeField] private Sprite _hurtSprite;
         [SerializeField, Min(0.05f)] private float _hurtDuration = 0.28f;
+        [SerializeField] private Sprite[] _attackFrames = new Sprite[3];
+        [SerializeField] private Sprite _lungeWindupSprite;
+        private EnemyContactDamage _contactDamage;
 
         private EnemyHealth _health;
         private float _hurtRemaining;
@@ -43,6 +46,7 @@ namespace KitchenChaos.Enemy
             _patrol = GetComponent<EnemyPatrol>();
             _hitStun = GetComponent<EnemyHitStun>();
             _health = GetComponent<EnemyHealth>();
+            _contactDamage = GetComponent<EnemyContactDamage>();
         }
 
         private void OnEnable()
@@ -68,7 +72,10 @@ namespace KitchenChaos.Enemy
 
             _hurtRemaining = 0f;
             if (_health != null)
+            {
                 _health.Damaged += OnDamaged;
+                _health.Restored += OnRestored;
+            }
 
             _lastPhysicsPosition = _rigidbody.position;
             _lastFixedTime = Time.fixedTime;
@@ -86,6 +93,20 @@ namespace KitchenChaos.Enemy
                 return;
 
             SampleCompletedPhysicsStep();
+
+            if (_contactDamage != null && _contactDamage.IsAttacking &&
+                _attackFrames != null && _attackFrames.Length == 3 &&
+                _attackFrames[Mathf.Clamp(_contactDamage.AttackPose, 0, 2)] != null &&
+                !(_hitStun != null && _hitStun.IsStunned))
+            {
+                _hurtRemaining = 0f;
+                _frameClock = 0f;
+                _facingLeft = _contactDamage.AttackFacing < 0;
+                _spriteRenderer.sprite = _contactDamage.IsPreparingLunge && _lungeWindupSprite != null
+                    ? _lungeWindupSprite : _attackFrames[_contactDamage.AttackPose];
+                _spriteRenderer.flipX = _facingLeft;
+                return;
+            }
 
             // This presenter remains the sole sprite owner. Hit feedback still
             // owns shake/tint/scale, while hit stun owns gameplay interruption.
@@ -162,10 +183,20 @@ namespace KitchenChaos.Enemy
             _spriteRenderer.flipX = _facingLeft;
         }
 
+        private void OnRestored()
+        {
+            _hurtRemaining = 0f;
+            _frameClock = 0f;
+            ShowIdle();
+        }
+
         private void OnDisable()
         {
             if (_health != null)
+            {
                 _health.Damaged -= OnDamaged;
+                _health.Restored -= OnRestored;
+            }
             _hurtRemaining = 0f;
             _horizontalSpeed = 0f;
             _frameClock = 0f;

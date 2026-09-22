@@ -13,6 +13,7 @@ namespace KitchenChaos.Enemy
         [SerializeField] private Sprite _leftShell;
         [SerializeField] private Sprite _rightShell;
         [SerializeField] private Sprite _pea;
+        [SerializeField] private Sprite _headPea; // Optional two-pea variant; null preserves the short pod.
         private EnemyHealth _health;
         private Transform _parent;
         private Vector3 _restPosition;
@@ -69,7 +70,7 @@ namespace KitchenChaos.Enemy
             body.sortingOrder = _spriteRenderer.sortingOrder;
             body.flipX = _spriteRenderer.flipX;
             body.color = _restColor;
-            effect.AddComponent<PeaPodPlayback>().Initialize(body, _leftShell, _rightShell, _pea);
+            effect.AddComponent<PeaPodPlayback>().Initialize(body, _leftShell, _rightShell, _pea, _headPea);
         }
     }
 
@@ -88,11 +89,15 @@ namespace KitchenChaos.Enemy
         private Color _color;
         private float _elapsed;
         private float _facing;
+        private bool _twoPeaVariant;
+        private float _bodyHeight;
 
-        public void Initialize(SpriteRenderer body, Sprite left, Sprite right, Sprite pea)
+        public void Initialize(SpriteRenderer body, Sprite left, Sprite right, Sprite pea, Sprite headPea = null)
         {
             _body = body;
-            _art = new[] { left, right, pea };
+            _twoPeaVariant = headPea != null;
+            _bodyHeight = body.sprite.bounds.size.y;
+            _art = new[] { left, right, pea, headPea };
             _restScale = transform.localScale;
             _color = body.color;
             _facing = body.flipX ? -1f : 1f;
@@ -147,21 +152,23 @@ namespace KitchenChaos.Enemy
         {
             _body.enabled = false;
             transform.localScale = _restScale;
-            _pieces = new SpriteRenderer[5];
+            int count = _twoPeaVariant ? 4 : 5;
+            _pieces = new SpriteRenderer[count];
             _velocities = new[] { new Vector2(-1.8f, 1.4f), new Vector2(1.7f, 1.8f),
                 new Vector2(-2.1f, 2.6f), new Vector2(0.5f, 3f), new Vector2(2.2f, 2.1f) };
-            _bounced = new bool[5];
-            _radii = new float[5];
-            for (int i = 0; i < 5; i++)
+            _bounced = new bool[count];
+            _radii = new float[count];
+            for (int i = 0; i < count; i++)
             {
                 var piece = new GameObject(i < 2 ? "Pod Half" : "Loose Pea");
                 piece.layer = gameObject.layer;
                 piece.transform.SetParent(transform, false);
-                Sprite sprite = _art[i < 2 ? i : 2];
-                float width = i < 2 ? 0.65f : i == 2 ? 0.52f : 0.38f;
+                Sprite sprite = _art[i < 2 ? i : _twoPeaVariant && i == 3 ? 3 : 2];
+                float width = _twoPeaVariant ? 1.05f : i < 2 ? 0.65f : i == 2 ? 0.52f : 0.38f;
                 piece.transform.localScale = Vector3.one * (width / Mathf.Max(0.01f, sprite.bounds.size.x));
                 piece.transform.localPosition = new Vector3(i < 2 ? (i == 0 ? -0.2f : 0.2f) * _facing : 0f,
-                    i < 2 ? 1.1f : i == 2 ? 1.8f : 0.85f, 0f);
+                    _twoPeaVariant ? _bodyHeight * (i < 2 ? 0.45f : i == 2 ? 0.3f : 0.7f)
+                        : i < 2 ? 1.1f : i == 2 ? 1.8f : 0.85f, 0f);
                 _radii[i] = i < 2 ? 0.2f : width * 0.5f;
                 _velocities[i].x *= _facing;
                 var renderer = piece.AddComponent<SpriteRenderer>();

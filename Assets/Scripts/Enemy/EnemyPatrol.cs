@@ -16,6 +16,8 @@ namespace KitchenChaos.Enemy
 
         private Rigidbody2D _rigidbody;
         private EnemyHitStun _hitStun;
+        private EnemySpinKnockback _spinKnockback;
+        private EnemyContactDamage _contactDamage;
         private Vector2 _targetPoint;
         private Vector2 _pendingPoint;
 
@@ -23,6 +25,8 @@ namespace KitchenChaos.Enemy
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _hitStun = GetComponent<EnemyHitStun>();
+            _spinKnockback = GetComponent<EnemySpinKnockback>();
+            _contactDamage = GetComponent<EnemyContactDamage>();
 
             if (_pointA == null || _pointB == null)
             {
@@ -50,7 +54,11 @@ namespace KitchenChaos.Enemy
 
         private void FixedUpdate()
         {
-            if (_hitStun != null && _hitStun.IsStunned)
+            if (_spinKnockback != null && _spinKnockback.IsPushed) return;
+            // The lunge controller has already queued this physics step's movement.
+            if (_contactDamage != null && _contactDamage.ControlsMovement) return;
+            if ((_hitStun != null && _hitStun.IsStunned) ||
+                (_contactDamage != null && _contactDamage.IsAttacking))
             {
                 _rigidbody.linearVelocity = Vector2.zero;
                 _rigidbody.MovePosition(_rigidbody.position);

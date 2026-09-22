@@ -54,6 +54,7 @@ namespace KitchenChaos.Enemy
             // EnemyHealth.Awake may run later on first activation. Its serialized
             // maximum is already available, unlike CurrentHealth at that moment.
             _shownHealth = _health.CurrentHealth > 0 ? _health.CurrentHealth : _health.MaxHealth;
+            _health.Restored += OnRestored;
             _remaining = 0f;
             UpdateBar(_shownHealth);
             RestoreVisual();
@@ -97,6 +98,14 @@ namespace KitchenChaos.Enemy
             _healthFill.localScale = new Vector3(_fullBarScale.x * fraction, _fullBarScale.y, _fullBarScale.z);
         }
 
+        private void OnRestored()
+        {
+            _remaining = 0f;
+            _shownHealth = _health.CurrentHealth;
+            UpdateBar(_shownHealth);
+            RestoreVisual();
+        }
+
         private void RestoreVisual()
         {
             if (!_initialized || _visual == null || _spriteRenderer == null)
@@ -109,6 +118,7 @@ namespace KitchenChaos.Enemy
 
         private void OnDisable()
         {
+            if (_health != null) _health.Restored -= OnRestored;
             _remaining = 0f;
             RestoreVisual();
         }

@@ -24,6 +24,9 @@ namespace KitchenChaos.Player
         [SerializeField, Min(0f)] private float _windupDuration = 0.1f;
         [SerializeField, Min(0.02f)] private float _activeDuration = 0.12f;
         [SerializeField, Min(0f)] private float _recoveryDuration = 0.18f;
+        [SerializeField] private bool _allowCrouchedAttack;
+        [SerializeField] private Vector2 _crouchOriginLocalPosition = new(1.2f, -0.55f);
+        public bool IsCrouchedSwing { get; private set; }
 
         public AttackPhase Phase { get; private set; }
         public bool IsAttacking => Phase != AttackPhase.Idle;
@@ -46,6 +49,8 @@ namespace KitchenChaos.Player
 
         private PlayerInputReader _input;
         private PlayerMobility _mobility;
+        private PlayerRangedAttack _ranged;
+        private PlayerSpinAttack _spin;
         private ContactFilter2D _targetFilter;
         private bool _attackPressLatched;
         private float _nextAttackTime;
@@ -57,6 +62,8 @@ namespace KitchenChaos.Player
         {
             _input = GetComponent<PlayerInputReader>();
             _mobility = GetComponent<PlayerMobility>();
+            _ranged = GetComponent<PlayerRangedAttack>();
+            _spin = GetComponent<PlayerSpinAttack>();
 
             if (_attackOrigin == null)
             {
@@ -80,6 +87,8 @@ namespace KitchenChaos.Player
 
         private void Update()
         {
+            if (_mobility != null && _mobility.IsParried)
+            { _attackPressLatched = false; return; }
             if (_input.IsGameplayBlocked)
                 return;
 
@@ -87,6 +96,13 @@ namespace KitchenChaos.Player
             // for the whole swing so one attack cannot sweep both sides by turning.
             if (_mobility != null && _mobility.isActiveAndEnabled && _mobility.IsDashing)
                 FacingDirection = _mobility.DashDirection;
+            else if (_spin != null && _spin.IsSpinning)
+                FacingDirection = _spin.Facing;
+            else if (_ranged != null && _ranged.IsThrowing)
+                FacingDirection = _ranged.ThrowFacing;
+            else if (!IsAttacking && _ranged != null && _ranged.isActiveAndEnabled &&
+                _input.RangedHeld && Mathf.Abs(_input.Aim.x) >= 0.35f)
+                FacingDirection = _input.Aim.x < 0f ? -1 : 1;
             else if (!IsAttacking && Mathf.Abs(_input.Horizontal) >= 0.01f)
                 FacingDirection = _input.Horizontal > 0f ? 1 : -1;
             ApplyFacingToOrigin();
@@ -104,7 +120,10 @@ namespace KitchenChaos.Player
             bool pressedThisStep = _attackPressLatched;
             _attackPressLatched = false;
 
-            if (_input.IsGameplayBlocked || (_mobility != null && _mobility.isActiveAndEnabled && _mobility.BlocksAttack))
+            if ((_ranged != null && _ranged.IsThrowing) || (_spin != null && _spin.IsSpinning)) return;
+
+            if (_input.IsGameplayBlocked || (_mobility != null && _mobility.isActiveAndEnabled &&
+                (_mobility.IsDashing || _mobility.IsHurt || (_mobility.IsCrouching && !_allowCrouchedAttack))))
             {
                 if (IsAttacking)
                     ResetTransientState();
@@ -127,9 +146,10 @@ namespace KitchenChaos.Player
             }
 
             _nextAttackTime = Time.time + _attackCooldown;
+            IsCrouchedSwing = _allowCrouchedAttack && _mobility != null && _mobility.IsCrouching;
             _damagedThisSwing.Clear();
-            ApplyFacingToOrigin();
             SetPhase(AttackPhase.Windup, Mathf.Max(0f, _windupDuration));
+            ApplyFacingToOrigin();
             Attacked?.Invoke();
             if (IsAttacking && !_input.IsGameplayBlocked)
                 AdvanceSwing();
@@ -140,6 +160,7 @@ namespace KitchenChaos.Player
             _attackPressLatched = false;
             _nextAttackTime = 0f;
             Phase = AttackPhase.Idle;
+            IsCrouchedSwing = false;
             _phaseStartedAt = 0f;
             _phaseDuration = 0f;
             _overlapResults.Clear();
@@ -197,8 +218,12 @@ namespace KitchenChaos.Player
                 // Cache the point before lethal damage disables the enemy. The
                 // impact is rendered by the player and survives the enemy's death.
                 Vector2 hitPoint = _overlapResults[i].ClosestPoint(_attackOrigin.position);
+                var shield = target.GetComponent<BroccoliShieldEnemy>();
+                // Only ordinary spatula swings provoke a parry. Returning is essential:
+                // ReceiveShieldParry cancels this swing and clears the overlap buffer.
+                if (shield != null && shield.TryParryMelee(_mobility, transform.position)) return;
                 int before = target.CurrentHealth;
-                target.TakeDamage(_attackDamage);
+                target.TakeDamage(_attackDamage, true, transform.position);
                 if (target != null && target.CurrentHealth < before &&
                     Phase == AttackPhase.Active && !_input.IsGameplayBlocked)
                     HitConnected?.Invoke(hitPoint);
@@ -211,6 +236,8 @@ namespace KitchenChaos.Player
                 return;
 
             Vector3 position = _originRightLocalPosition;
+            if (IsAttacking && IsCrouchedSwing)
+                position = new Vector3(_crouchOriginLocalPosition.x, _crouchOriginLocalPosition.y, position.z);
             position.x *= FacingDirection;
             _attackOrigin.localPosition = position;
         }

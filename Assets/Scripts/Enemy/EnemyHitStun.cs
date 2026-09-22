@@ -34,12 +34,16 @@ namespace KitchenChaos.Enemy
             _stunnedUntil = 0f;
             _resistantUntil = 0f;
             _health.Damaged += OnDamaged;
+            _health.Restored += ClearStun;
         }
 
         private void OnDisable()
         {
             if (_health != null)
+            {
                 _health.Damaged -= OnDamaged;
+                _health.Restored -= ClearStun;
+            }
 
             _stunnedUntil = 0f;
             _resistantUntil = 0f;
@@ -47,7 +51,7 @@ namespace KitchenChaos.Enemy
 
         private void OnDamaged()
         {
-            if (_duration <= 0f || Time.time < _resistantUntil)
+            if (!_health.LastHitCanStun || _duration <= 0f || Time.time < _resistantUntil)
                 return;
 
             // Refresh the window instead of banking extra seconds per hit.
@@ -65,6 +69,12 @@ namespace KitchenChaos.Enemy
                 _rigidbody.MovePosition(_rigidbody.position);
             }
             StunStarted?.Invoke();
+        }
+
+        private void ClearStun()
+        {
+            _stunnedUntil = 0f;
+            _resistantUntil = 0f;
         }
     }
 }

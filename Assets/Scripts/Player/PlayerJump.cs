@@ -46,7 +46,6 @@ namespace KitchenChaos.Player
         private readonly List<ContactPoint2D> _groundContacts = new(8);
         private PlayerMobility _mobility;
         private bool _airJumpAvailable;
-        private bool _canCutJump;
 
         private void Awake()
         {
@@ -91,7 +90,7 @@ namespace KitchenChaos.Player
 
             bool hasJumpRequest = UpdateJumpBuffer();
             bool upgraded = _mobility != null && _mobility.isActiveAndEnabled;
-            if (upgraded && _mobility.IsDashing)
+            if (upgraded && (_mobility.IsDashing || _mobility.IsParried))
             {
                 _jumpBufferRemaining = 0f;
                 return;
@@ -103,18 +102,9 @@ namespace KitchenChaos.Player
                 else if (upgraded && _airJumpAvailable)
                 {
                     _airJumpAvailable = false;
-                    // A recovery jump must remain useful even with a quick tap.
-                    // Variable height applies only to the first/ground jump.
-                    Jump(_jumpForce * _mobility.AirJumpMultiplier, false);
+                    Jump(_jumpForce * _mobility.AirJumpMultiplier);
                 }
             }
-            if (upgraded && _canCutJump && !_input.JumpHeld && _rigidbody.linearVelocity.y > 0f)
-            {
-                _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x,
-                    _rigidbody.linearVelocity.y * 0.5f);
-                _canCutJump = false;
-            }
-            if (_rigidbody.linearVelocity.y <= 0f) _canCutJump = false;
         }
 
         public void ResetTransientState()
@@ -126,7 +116,6 @@ namespace KitchenChaos.Player
             IsGrounded = false;
             GroundCollider = null;
             _airJumpAvailable = false;
-            _canCutJump = false;
         }
 
         private void UpdateTakeoffState(bool isGrounded)
@@ -171,7 +160,7 @@ namespace KitchenChaos.Player
             return pressedThisStep || _jumpBufferRemaining > 0f;
         }
 
-        private void Jump(float force, bool canCut = true)
+        private void Jump(float force)
         {
             // Assigning the vertical velocity instead of adding force keeps the jump
             // height identical no matter how fast the player was falling on contact.
@@ -184,7 +173,6 @@ namespace KitchenChaos.Player
             _awaitingTakeoff = true;
             IsGrounded = false;
             GroundCollider = null;
-            _canCutJump = canCut;
 
             // Announced after the windows are spent, so a listener can never observe a
             // half-applied jump state.

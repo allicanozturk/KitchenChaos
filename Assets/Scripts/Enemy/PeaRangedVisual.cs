@@ -50,6 +50,15 @@ namespace KitchenChaos.Enemy
         private void OnEnable()
         {
             if (_health != null) _health.Damaged += OnDamaged;
+            if (_health != null) _health.Restored += OnRestored;
+        }
+
+        private void OnRestored()
+        {
+            _hurtUntil = 0f;
+            _recovering = false;
+            _recoveryTime = 0f;
+            if (_initialized) ApplyFrame(0);
         }
 
         private void OnDamaged()
@@ -123,6 +132,7 @@ namespace KitchenChaos.Enemy
         private void OnDisable()
         {
             if (_health != null) _health.Damaged -= OnDamaged;
+            if (_health != null) _health.Restored -= OnRestored;
             _hurtUntil = 0f;
             _recovering = false;
             if (_initialized) ApplyFrame(0);

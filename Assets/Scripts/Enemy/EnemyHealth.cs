@@ -15,6 +15,7 @@ namespace KitchenChaos.Enemy
         public int MaxHealth => _maxHealth;
 
         public int CurrentHealth { get; private set; }
+        public bool LastHitCanStun { get; private set; } = true;
 
         /// <summary>
         /// Raised synchronously for accepted damage, before death is processed, so
@@ -27,6 +28,7 @@ namespace KitchenChaos.Enemy
         /// react before it is deactivated and destroyed.
         /// </summary>
         public event Action Died;
+        public event Action Restored;
 
         private bool _isDead;
 
@@ -35,7 +37,27 @@ namespace KitchenChaos.Enemy
             CurrentHealth = _maxHealth;
         }
 
-        public void TakeDamage(int amount)
+        public void TakeDamage(int amount) => TakeDamage(amount, true);
+
+        /// <summary>Directional player hits may be intercepted by an optional shield.</summary>
+        public void TakeDamage(int amount, bool canStun, Vector2 sourcePosition)
+        {
+            if (amount <= 0 || _isDead) return;
+            var shield = GetComponent<BroccoliShieldEnemy>();
+            if (shield != null && shield.TryBlock(sourcePosition)) return;
+            TakeDamage(amount, canStun);
+        }
+
+        /// <summary>Retry heals survivors; it never revives destroyed enemies or emits a hit.</summary>
+        public void RestoreForPlayerRespawn()
+        {
+            if (_isDead || CurrentHealth <= 0 || !isActiveAndEnabled) return;
+            CurrentHealth = _maxHealth;
+            LastHitCanStun = true;
+            Restored?.Invoke();
+        }
+
+        public void TakeDamage(int amount, bool canStun)
         {
             // Ignoring non-positive damage keeps a miscalculating caller from healing
             // the enemy through the damage path.
@@ -52,6 +74,7 @@ namespace KitchenChaos.Enemy
             }
 
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
+            LastHitCanStun = canStun;
             Damaged?.Invoke();
             LogHealth();
 

@@ -17,6 +17,12 @@ namespace KitchenChaos.Player
         /// </summary>
         public event Action<int> ScoreAdded;
 
+        public void RestoreCheckpointValue(int value)
+        {
+            // Not a pickup: do not replay pickup audio or award anything.
+            Current = Mathf.Max(0, value);
+        }
+
         public void Add(int amount)
         {
             Current += amount;

@@ -21,6 +21,8 @@ namespace KitchenChaos.Player
         [SerializeField] private Vector2[] _jumpGripPoints = new Vector2[ActionFrameCount];
         [SerializeField] private Sprite[] _attackFrames = new Sprite[ActionFrameCount];
         [SerializeField] private Vector2[] _attackGripPoints = new Vector2[ActionFrameCount];
+        [SerializeField] private Sprite[] _crouchAttackFrames = new Sprite[ActionFrameCount];
+        [SerializeField] private Vector2[] _crouchAttackGripPoints = new Vector2[ActionFrameCount];
         [SerializeField] private Sprite[] _deathFrames = new Sprite[DeathFrameCount];
         [SerializeField] private Sprite[] _crouchDeathFrames = new Sprite[DeathFrameCount];
         private Sprite[] _activeDeathFrames;
@@ -33,6 +35,34 @@ namespace KitchenChaos.Player
         [SerializeField] private Vector2[] _hurtGripPoints = new Vector2[3];
         [SerializeField] private Sprite[] _crouchHurtFrames = new Sprite[3];
         [SerializeField] private Vector2[] _crouchHurtGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _parryFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _parryGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _crouchParryFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _crouchParryGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _throwFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _throwGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _crouchThrowFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _crouchThrowGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _diagonalThrowFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _diagonalThrowGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _crouchDiagonalThrowFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _crouchDiagonalThrowGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _upThrowFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _upThrowGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _crouchUpThrowFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _crouchUpThrowGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _downDiagonalThrowFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _downDiagonalThrowGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _crouchDownDiagonalThrowFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _crouchDownDiagonalThrowGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _downThrowFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _downThrowGripPoints = new Vector2[3];
+        [SerializeField] private Sprite[] _crouchDownThrowFrames = new Sprite[3];
+        [SerializeField] private Vector2[] _crouchDownThrowGripPoints = new Vector2[3];
+        private PlayerRangedAttack _ranged;
+        [SerializeField] private Sprite[] _spinFrames = new Sprite[6];
+        [SerializeField] private Vector2[] _spinGripPoints = new Vector2[6];
+        private PlayerSpinAttack _spin;
         private float _crouchWalkClock;
         private Vector3 _presentationOffset;
         private PlayerMobility _mobility;
@@ -91,6 +121,8 @@ namespace KitchenChaos.Player
             _health = GetComponent<PlayerHealth>();
             _respawn = GetComponent<PlayerRespawn>();
             _mobility = GetComponent<PlayerMobility>();
+            _ranged = GetComponent<PlayerRangedAttack>();
+            _spin = GetComponent<PlayerSpinAttack>();
 
             if (!HasRequiredReferences())
             {
@@ -142,6 +174,8 @@ namespace KitchenChaos.Player
                 return;
 
             ClearPresentationOffset();
+            // Undo the recovery frame's authored mirror even on a death/block frame.
+            _spriteRenderer.flipX = _attack.FacingDirection < 0;
 
             if (_health.IsDead && _hasDeathPack)
             {
@@ -167,6 +201,16 @@ namespace KitchenChaos.Player
                 return;
             }
 
+            if (_spin != null && _spin.IsSpinning && !_mobility.IsHurt && !_mobility.IsDashing)
+            {
+                bool valid = _spinFrames != null && _spinGripPoints != null && _spinFrames.Length == 6 && _spinGripPoints.Length == 6;
+                if (valid) for (int i = 0; i < 6; i++) if (_spinFrames[i] == null) valid = false;
+                int frame = Mathf.Clamp(_spin.PoseIndex, 0, 5);
+                ApplyActionPose(_spinFrames, _spinGripPoints, frame, valid);
+                // Atlas recovery faces left; mirror this pose to finish the full turn.
+                _spriteRenderer.flipX = (_spin.Facing < 0) ^ (frame == 5);
+                return;
+            }
             bool airborne = _jumpLatched || !_jump.IsGrounded;
             // Track landing even when an attack currently hides the jump animation.
             if (_hasGroundSample && !airborne)
@@ -174,9 +218,34 @@ namespace KitchenChaos.Player
 
             if (_mobility != null && _mobility.isActiveAndEnabled)
             {
-                bool showHurt = _mobility.IsHurtVisual && !_mobility.IsDashing && !_attack.IsAttacking;
+                if (_mobility.IsParried && ApplyParrySequence())
+                {
+                    _crouchWalkClock = 0f;
+                    return;
+                }
+                bool showHurt = _mobility.IsHurtVisual && !_mobility.IsDashing && !_attack.IsAttacking &&
+                    !(_ranged != null && _ranged.IsThrowing);
                 if (showHurt && ApplyHurtSequence())
                 {
+                    _crouchWalkClock = 0f;
+                    return;
+                }
+                if (_ranged != null && _ranged.IsThrowing && !_mobility.IsDashing && !_mobility.IsHurt)
+                {
+                    GetThrowPack(_mobility.IsCrouching, _ranged.ShotDirection, out Sprite[] frames, out Vector2[] grips);
+                    ApplyActionPose(frames, grips, _ranged.PoseIndex, HasActionPack(frames, grips));
+                    _crouchWalkClock = 0f;
+                    return;
+                }
+                if (_attack.IsAttacking && _attack.IsCrouchedSwing &&
+                    !_mobility.IsHurt && !_mobility.IsDashing &&
+                    HasActionPack(_crouchAttackFrames, _crouchAttackGripPoints))
+                {
+                    int frame = _attack.Phase == PlayerAttack.AttackPhase.Windup ? 0 :
+                        _attack.Phase == PlayerAttack.AttackPhase.Active ? 1 : 2;
+                    ApplyActionPose(_crouchAttackFrames, _crouchAttackGripPoints, frame, true);
+                    _attackWeaponAngle = frame == 0 ? 155f : frame == 1 ? -15f : -30f;
+                    _displayedAttackPhase = _attack.Phase;
                     _crouchWalkClock = 0f;
                     return;
                 }
@@ -268,6 +337,45 @@ namespace KitchenChaos.Player
             if (_spriteRenderer.flipY)
                 point.y = -point.y;
             position = _visualTransform.TransformPoint(point);
+            return true;
+        }
+
+        private void GetThrowPack(bool crouched, Vector2 direction, out Sprite[] frames, out Vector2[] grips)
+        {
+            if (direction.y < -0.9f)
+            {
+                frames = crouched ? _crouchDownThrowFrames : _downThrowFrames;
+                grips = crouched ? _crouchDownThrowGripPoints : _downThrowGripPoints;
+            }
+            else if (direction.y < -0.1f)
+            {
+                frames = crouched ? _crouchDownDiagonalThrowFrames : _downDiagonalThrowFrames;
+                grips = crouched ? _crouchDownDiagonalThrowGripPoints : _downDiagonalThrowGripPoints;
+            }
+            else if (direction.y > 0.9f)
+            {
+                frames = crouched ? _crouchUpThrowFrames : _upThrowFrames;
+                grips = crouched ? _crouchUpThrowGripPoints : _upThrowGripPoints;
+            }
+            else if (direction.y > 0.1f)
+            {
+                frames = crouched ? _crouchDiagonalThrowFrames : _diagonalThrowFrames;
+                grips = crouched ? _crouchDiagonalThrowGripPoints : _diagonalThrowGripPoints;
+            }
+            else
+            {
+                frames = crouched ? _crouchThrowFrames : _throwFrames;
+                grips = crouched ? _crouchThrowGripPoints : _throwGripPoints;
+            }
+        }
+
+        public bool TryGetThrowReleaseWorldPosition(bool crouched, Vector2 direction, int facing, out Vector3 position)
+        {
+            position = Vector3.zero;
+            GetThrowPack(crouched, direction, out Sprite[] frames, out Vector2[] grips);
+            if (!_initialized || !isActiveAndEnabled || !HasActionPack(frames, grips)) return false;
+            Vector2 grip = grips[1];
+            position = _visualTransform.TransformPoint(new Vector3(grip.x * facing, grip.y, 0f));
             return true;
         }
 
@@ -587,6 +695,18 @@ namespace KitchenChaos.Player
             for (int i = 0; i < _crouchWalkFrames.Length; i++)
                 if (_crouchWalkFrames[i] == null || !IsFinite(_crouchWalkGripPoints[i]))
                     return false;
+            return true;
+        }
+
+        private bool ApplyParrySequence()
+        {
+            Sprite[] frames = _mobility.IsCrouching ? _crouchParryFrames : _parryFrames;
+            Vector2[] grips = _mobility.IsCrouching ? _crouchParryGripPoints : _parryGripPoints;
+            if (!HasActionPack(frames, grips)) return false;
+            float progress = _mobility.HurtProgress;
+            int frame = progress < .22f ? 0 : progress < .68f ? 1 : 2;
+            ApplyActionPose(frames, grips, frame, true);
+            // The gameplay recoil already moves the body; no extra visual translation.
             return true;
         }
 

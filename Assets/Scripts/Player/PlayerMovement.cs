@@ -29,7 +29,8 @@ namespace KitchenChaos.Player
             // Jump/gravity own vertical speed except for the short horizontal dash.
             float speed = _input.Horizontal * _moveSpeed;
             if (_mobility != null && _mobility.isActiveAndEnabled)
-                speed = _mobility.IsDashing ? _mobility.DashVelocity :
+                speed = _mobility.IsParried ? _mobility.ParryVelocity :
+                    _mobility.IsDashing ? _mobility.DashVelocity :
                     _mobility.IsCrouching ? speed * 0.35f : speed;
             bool dashing = _mobility != null && _mobility.isActiveAndEnabled && _mobility.IsDashing;
             _rigidbody.linearVelocity = new Vector2(speed, dashing ? 0f : _rigidbody.linearVelocity.y);
